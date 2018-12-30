@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/zumy_bg.qm</file>
+        <file alias="de">locale/zumy_de.qm</file>
+        <file alias="en">locale/zumy_en.qm</file>
+        <file alias="es">locale/zumy_es.qm</file>
+        <file alias="fi">locale/zumy_fi.qm</file>
+        <file alias="fr">locale/zumy_fr.qm</file>
+        <file alias="it">locale/zumy_it.qm</file>
+        <file alias="ja">locale/zumy_ja.qm</file>
+        <file alias="pl">locale/zumy_pl.qm</file>
+        <file alias="pt">locale/zumy_pt.qm</file>
+        <file alias="ru">locale/zumy_ru.qm</file>
+        <file alias="sk">locale/zumy_sk.qm</file>
+        <file alias="sv">locale/zumy_sv.qm</file>
+        <file alias="vi">locale/zumy_vi.qm</file>
+        <file alias="zh_CN">locale/zumy_zh_CN.qm</file>
+        <file alias="zh_TW">locale/zumy_zh_TW.qm</file>
+    </qresource>
+</RCC>

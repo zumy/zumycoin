@@ -1,0 +1,22 @@
+[Unit]
+Description=Zumy's distributed currency daemon
+After=network.target
+
+[Service]
+User=zumy
+Group=zumy
+
+Type=forking
+PIDFile=/var/lib/zumyd/zumyd.pid
+ExecStart=/usr/bin/zumyd -daemon -pid=/var/lib/zumyd/zumyd.pid \
+-conf=/etc/zumy/zumy.conf -datadir=/var/lib/zumyd -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,52 @@
+// Copyright (c) 2009-2018 Satoshi Nakamoto
+// Copyright (c) 2009-2018 The Bitcoin Developers
+// Copyright (c) 2014-2018 The Dash Core Developers
+// Copyright (c) 2016-2018 Duality Blockchain Solutions Developers
+// Copyright (c) 2017-2018 Zumy Developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#ifndef ZUMY_QT_PAYMENTREQUESTPLUS_H
+#define ZUMY_QT_PAYMENTREQUESTPLUS_H
+
+#include "paymentrequest.pb.h"
+
+#include "base58.h"
+
+#include <openssl/x509.h>
+
+#include <QByteArray>
+#include <QList>
+#include <QString>
+
+static const bool DEFAULT_SELFSIGNED_ROOTCERTS = false;
+
+//
+// Wraps dumb protocol buffer paymentRequest
+// with extra methods
+//
+
+class PaymentRequestPlus
+{
+public:
+    PaymentRequestPlus() { }
+
+    bool parse(const QByteArray& data);
+    bool SerializeToString(std::string* output) const;
+
+    bool IsInitialized() const;
+    // Returns true if merchant's identity is authenticated, and
+    // returns human-readable merchant identity in merchant
+    bool getMerchant(X509_STORE* certStore, QString& merchant) const;
+
+    // Returns list of outputs, amount
+    QList<std::pair<CScript,CAmount> > getPayTo() const;
+
+    const payments::PaymentDetails& getDetails() const { return details; }
+
+private:
+    payments::PaymentRequest paymentRequest;
+    payments::PaymentDetails details;
+};
+
+#endif // ZUMY_QT_PAYMENTREQUESTPLUS_H

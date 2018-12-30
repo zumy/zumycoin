@@ -1,0 +1,6 @@
+usr/local/bin/zumy-qt usr/bin
+share/pixmaps/zumy32.xpm usr/share/pixmaps
+share/pixmaps/zumy16.xpm usr/share/pixmaps
+share/pixmaps/zumy128.png usr/share/pixmaps
+debian/zumy-qt.desktop usr/share/applications
+debian/zumy-qt.protocol usr/share/kde4/services/

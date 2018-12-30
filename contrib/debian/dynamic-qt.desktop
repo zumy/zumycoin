@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Zumy
+Comment=Zumy P2P Cryptocurrency
+Comment[fr]=Zumy, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Zumy, eşten eşe kriptografik sanal para birimi
+Exec=zumy-qt %u
+Terminal=false
+Type=Application
+Icon=zumy128
+MimeType=x-scheme-handler/zumy;
+Categories=Office;Finance;

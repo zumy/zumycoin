@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/zumy/.zumy" ]; then
+	ZUMYD_DEFAULT_DATADIR="/var/lib/zumy/.zumy"
+else
+	ZUMYD_DEFAULT_DATADIR="/var/lib/zumyd"
+fi
+
+ZUMYD_CONFIGFILE=${ZUMYD_CONFIGFILE:-/etc/zumy/zumy.conf}
+ZUMYD_PIDDIR=${ZUMYD_PIDDIR:-/var/run/zumyd}
+ZUMYD_PIDFILE=${ZUMYD_PIDFILE:-${ZUMYD_PIDDIR}/zumyd.pid}
+ZUMYD_DATADIR=${ZUMYD_DATADIR:-${ZUMYD_DEFAULT_DATADIR}}
+ZUMYD_USER=${ZUMYD_USER:-${ZUMY_USER:-zumy}}
+ZUMYD_GROUP=${ZUMYD_GROUP:-zumy}
+ZUMYD_BIN=${ZUMYD_BIN:-/usr/bin/zumyd}
+ZUMYD_NICE=${ZUMYD_NICE:-${NICELEVEL:-0}}
+ZUMYD_OPTS="${ZUMYD_OPTS:-${ZUMY_OPTS}}"
+
+name="Zumy Daemon"
+description="Zumy cryptocurrency P2P network daemon"
+
+command="/usr/bin/zumyd"
+command_args="-pid=\"${ZUMYD_PIDFILE}\" \
+		-conf=\"${ZUMYD_CONFIGFILE}\" \
+		-datadir=\"${ZUMYD_DATADIR}\" \
+		-daemon \
+		${ZUMYD_OPTS}"
+
+required_files="${ZUMYD_CONFIGFILE}"
+start_stop_daemon_args="-u ${ZUMYD_USER} \
+			-N ${ZUMYD_NICE} -w 2000"
+pidfile="${ZUMYD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${ZUMYD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${ZUMYD_USER}:${ZUMYD_GROUP}" \
+	"${ZUMYD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${ZUMYD_USER}:${ZUMYD_GROUP}" \
+	"${ZUMYD_PIDDIR}"
+
+	checkpath -f \
+	-o ${ZUMYD_USER}:${ZUMYD_GROUP} \
+	-m 0660 \
+	${ZUMYD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${ZUMYD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run zumyd."
+		eerror "The setting must appear in ${ZUMYD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is also recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"Zumy Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}
