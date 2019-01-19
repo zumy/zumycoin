@@ -1,4 +1,4 @@
-﻿# **Zumy (ZMY) v1.2.0.0 INTIAL RELEASE VERSION**
+﻿# **Zumy (ZMY) v1.2.0.1 **
 
 ![ZMY logo](https://github.com/zumy/zumycoin/blob/master/src/qt/res/images/light/splash.png)
 
