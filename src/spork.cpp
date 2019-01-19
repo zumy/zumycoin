@@ -48,27 +48,6 @@ void CSporkManager::ProcessSpork(CNode* pfrom, std::string& strCommand, CDataStr
         } else {
             LogPrintf("%s new\n", strLogMsg);
         }
-		
-
-        }
-
-
-
-        LogPrintf("spork - new %s ID %d Time %d bestHeight %d\n", hash.ToString(), spork.nSporkID, spork.nValue, chainActive.Tip()->nHeight);
-
-  if (spork.nTimeSigned >= Params().NewSporkStart()) {
-
-            if (!sporkManager.CheckSignature(spork, true)) {
-
-                LogPrintf("%s : Invalid Signature\n", __func__);
-
-                Misbehaving(pfrom->GetId(), 100);
-
-                return;
-
-            }
-
-        }		
 
         if(!spork.CheckSignature()) {
             LogPrintf("CSporkManager::ProcessSpork -- invalid signature\n");
@@ -264,43 +243,19 @@ bool CSporkMessage::Sign(std::string strSignKey)
     return true;
 }
 
-bool CSporkManager::CheckSignature(CSporkMessage& spork,bool fCheckSigner)
+bool CSporkMessage::CheckSignature()
 {
     //note: need to investigate why this is failing
     std::string strError = "";
     std::string strMessage = boost::lexical_cast<std::string>(nSporkID) + boost::lexical_cast<std::string>(nValue) + boost::lexical_cast<std::string>(nTimeSigned);
     CPubKey pubkey(ParseHex(Params().SporkPubKey()));
 
-
-
-      if (fCheckSigner && !masternodeSigner.VerifyMessage(pubkeynew, spork.vchSig,strMessage, errorMessage))
-
+    if(!CMessageSigner::VerifyMessage(pubkey, vchSig, strMessage, strError)) {
+        LogPrintf("CSporkMessage::CheckSignature -- VerifyMessage() failed, error: %s\n", strError);
         return false;
-
-     if (GetAdjustedTime() < Params().RejectOldSporkKey()) {
-
-        CPubKey pubkeyold(ParseHex(Params().SporkKeyOld()));
-
-        if (masternodeSigner.VerifyMessage(pubkeynew, spork.vchSig, strMessage, errorMessage) ||
-
-            masternodeSigner.VerifyMessage(pubkeyold, spork.vchSig, strMessage, errorMessage)) {
-
-            return true;
-
-        }
-
     }
 
-    else if (masternodeSigner.VerifyMessage(pubkeynew, spork.vchSig, strMessage, errorMessage)) {
-
-        return true;
-
-    }
-
-
-
-    return false;
-
+    return true;
 }
 
 void CSporkMessage::Relay()

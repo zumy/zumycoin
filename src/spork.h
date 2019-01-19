@@ -118,7 +118,6 @@ public:
     int64_t GetSporkValue(int nSporkID);
     int GetSporkIDByName(std::string strName);
     std::string GetSporkNameByID(int nSporkID);
-    bool CheckSignature(CSporkMessage& spork, bool fCheckSigner = false);	
 
     bool SetPrivKey(std::string strPrivKey);
 };
