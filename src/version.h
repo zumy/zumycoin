@@ -12,7 +12,7 @@
  * network protocol versioning
  */
 
-static const int PROTOCOL_VERSION = 80001;
+static const int PROTOCOL_VERSION = 80003;
 
 //! initial proto version, to be increased after version/verack negotiation
 static const int INIT_PROTO_VERSION = 219;
@@ -21,7 +21,7 @@ static const int INIT_PROTO_VERSION = 219;
 static const int GETHEADERS_VERSION = 80001;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION = 80000;
+static const int MIN_PEER_PROTO_VERSION = 80002;
 
 //! nTime field added to CAddress, starting with this version;
 //! if possible, avoid requesting addresses nodes older than this
@@ -29,18 +29,18 @@ static const int CADDR_TIME_VERSION = 31401;
 
 //! only request blocks from nodes outside this range of versions
 static const int NOBLKS_VERSION_START = 32001;
-static const int NOBLKS_VERSION_END = 75001;
+static const int NOBLKS_VERSION_END = 80002;
 
 //! BIP 0031, pong message, is enabled for all versions AFTER this one
-static const int BIP0031_VERSION = 80001;
+static const int BIP0031_VERSION = 80002;
 
 //! "mempool" command, enhanced "getdata" behavior starts with this version
-static const int MEMPOOL_GD_VERSION = 80001;
+static const int MEMPOOL_GD_VERSION = 80002;
 
 //! "filter*" commands are disabled without NODE_BLOOM after and including this version
 static const int NO_BLOOM_VERSION = 70001;
 
 //! "sendheaders" command and announcing blocks with headers starts with this version
-static const int SENDHEADERS_VERSION = 80001;
+static const int SENDHEADERS_VERSION = 80002;
 
 #endif // ZUMY_VERSION_H

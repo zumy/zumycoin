@@ -36,8 +36,8 @@ static const int SPORK_14_REQUIRE_SENTINEL_FLAG                         = 10013;
 static const int64_t SPORK_2_INSTANTSEND_ENABLED_DEFAULT                = 0;            // ON
 static const int64_t SPORK_3_INSTANTSEND_BLOCK_FILTERING_DEFAULT        = 0;            // ON
 static const int64_t SPORK_5_INSTANTSEND_MAX_VALUE_DEFAULT              = 1000;         // 1000 ZMY
-static const int64_t SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT_DEFAULT     = 1547551815;   // ON
-static const int64_t SPORK_9_SUPERBLOCKS_ENABLED_DEFAULT                = 99907551815;   // OFF
+static const int64_t SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT_DEFAULT     = 1547551815;   // ON Payments will be made
+static const int64_t SPORK_9_SUPERBLOCKS_ENABLED_DEFAULT                = 9547551815;   // OFF
 static const int64_t SPORK_10_MASTERNODE_PAY_UPDATED_NODES_DEFAULT      = 1547551815;   // ON
 static const int64_t SPORK_12_RECONSIDER_BLOCKS_DEFAULT                 = 0;            // 0 BLOCKS
 static const int64_t SPORK_13_OLD_SUPERBLOCK_FLAG_DEFAULT               = 4070908800;   // OFF
@@ -118,6 +118,7 @@ public:
     int64_t GetSporkValue(int nSporkID);
     int GetSporkIDByName(std::string strName);
     std::string GetSporkNameByID(int nSporkID);
+    bool CheckSignature(CSporkMessage& spork, bool fCheckSigner = false);	
 
     bool SetPrivKey(std::string strPrivKey);
 };

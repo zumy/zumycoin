@@ -151,7 +151,7 @@ public:
         pchMessageStart[1] = 0x32;
         pchMessageStart[2] = 0x45;
         pchMessageStart[3] = 0x51;
-        vAlertPubKey = ParseHex("04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32");
+        vAlertPubKey = ParseHex("0480f5d3fc40921d940ac3b941c6ba3bc9fc6419684ff4327bbd7aa0e6c94ee609627e77d5208272b49ede4a373474a766b133376825193bc9db8f35d52ff92807");
         nDefaultPort = 32000;
         nMaxTipAge = 24 * 60 * 60;
         nPruneAfterHeight = 20545;
@@ -194,8 +194,13 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 60 * 60; // fulfilled requests expire in 1 hour
-        strSporkPubKey = "04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32";
-        strMasternodePaymentsPubKey = "04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32";
+
+        nFulfilledRequestExpireTime = 5 * 60; // fulfilled requests expire in 5 minutes
+        strSporkKeyOld = "04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32";
+        strSporkKey = "0480f5d3fc40921d940ac3b941c6ba3bc9fc6419684ff4327bbd7aa0e6c94ee609627e77d5208272b49ede4a373474a766b133376825193bc9db8f35d52ff92807";
+		nEnforceNewSporkKey = 1548028800; //!> Sporks signed after tbis must use the new spork key
+		nRejectOldSporkKey = 1548028100; //!> Reject old spork key after this
+        strMasternodePaymentsPubKey = "0480f5d3fc40921d940ac3b941c6ba3bc9fc6419684ff4327bbd7aa0e6c94ee609627e77d5208272b49ede4a373474a766b133376825193bc9db8f35d52ff92807";
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
@@ -265,7 +270,7 @@ public:
         pchMessageStart[1] = 0x22;
         pchMessageStart[2] = 0x05;
         pchMessageStart[3] = 0x30;
-        vAlertPubKey = ParseHex("04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32");
+        vAlertPubKey = ParseHex("0480f5d3fc40921d940ac3b941c6ba3bc9fc6419684ff4327bbd7aa0e6c94ee609627e77d5208272b49ede4a373474a766b133376825193bc9db8f35d52ff92807");
         nDefaultPort = 31400;
         nMaxTipAge = 24 * 60 * 64;
         nPruneAfterHeight = 100;
@@ -309,8 +314,11 @@ public:
 
         nPoolMaxTransactions = 3;
         nFulfilledRequestExpireTime = 5 * 60; // fulfilled requests expire in 5 minutes
-        strSporkPubKey = "04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32";
-        strMasternodePaymentsPubKey = "04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32";
+        strSporkKeyOld = "04244e071357b9b970e501d45181797f1fd675f19c62fb92252d3a63e31c95f94b488d95e9704b6e2985d76a6b05b4f0fa4b22027e734064f86c63480a75965a32";
+        strSporkKey = "0480f5d3fc40921d940ac3b941c6ba3bc9fc6419684ff4327bbd7aa0e6c94ee609627e77d5208272b49ede4a373474a766b133376825193bc9db8f35d52ff92807";
+		nEnforceNewSporkKey = 1548028800; //!> Sporks signed after tbis must use the new spork key
+		nRejectOldSporkKey = 1548028100; //!> Reject old spork key after this
+        strMasternodePaymentsPubKey = "0480f5d3fc40921d940ac3b941c6ba3bc9fc6419684ff4327bbd7aa0e6c94ee609627e77d5208272b49ede4a373474a766b133376825193bc9db8f35d52ff92807";
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
