@@ -125,7 +125,7 @@ Build requirements:
 
     sudo apt-get install build-essential libtool automake autotools-dev autoconf pkg-config libssl-dev libcrypto++-dev libevent-dev git
 	
-	sudo apt-get autoconf-archive
+	sudo apt-get install autoconf-archive
 
 for Ubuntu 12.04 and later or Debian 7 and later libboost-all-dev has to be installed:
 
