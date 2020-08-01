@@ -107,7 +107,7 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nHardForkOne = 250000; // block
-        consensus.nHardForkTwo = 375000; // block
+        consensus.nHardForkTwo = 999999999; // block
         consensus.nMasternodePaymentsStartBlock = 10801; // Masternode Payments begin on block 10800 .
         consensus.nInstantSendKeepLock = 24;
         consensus.nBudgetPaymentsStartBlock = 20545; // Zumy doesn't use budget payments.
@@ -170,6 +170,26 @@ public:
         vSeeds.push_back(CDNSSeedData("194.32.79.73", "194.32.79.73")); 
         vSeeds.push_back(CDNSSeedData("194.32.76.30", "194.32.76.30"));
         vSeeds.push_back(CDNSSeedData("194.99.23.228", "194.99.23.228"));
+        vSeeds.push_back(CDNSSeedData("node1.zumy.xyz", "node1.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node2.zumy.xyz", "node2.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node3.zumy.xyz", "node3.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node4.zumy.xyz", "node4.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node5.zumy.xyz", "node5.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node6.zumy.xyz", "node6.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node7.zumy.xyz", "node7.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node8.zumy.xyz", "node8.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node9.zumy.xyz", "node9.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node11.zumy.xyz", "node11.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node12.zumy.xyz", "node12.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node13.zumy.xyz", "node13.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node14.zumy.xyz", "node14.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node15.zumy.xyz", "node15.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node16.zumy.xyz", "node16.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node17.zumy.xyz", "node17.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node18.zumy.xyz", "node18.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node19.zumy.xyz", "node19.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node21.zumy.xyz", "node21.zumy.xyz"));
+
 
         // Zumy addresses start with 'Z'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,80);
