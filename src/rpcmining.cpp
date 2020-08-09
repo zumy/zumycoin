@@ -776,19 +776,21 @@ UniValue getblocktemplate(const UniValue& params, bool fHelp)
 
     int nNextHeight = chainActive.Height() + 1;
 
-    if (nNextHeight > Params().GetConsensus().nPhase1LastBlock && nNextHeight <= Params().GetConsensus().nPhase3LastBlock) {
+    if (nNextHeight >= 375004 && nNextHeight <= Params().GetConsensus().nPhase5LastBlock) {
         UniValue fundRewardObj(UniValue::VOBJ);
-        std::string strDevAddress = "53NTdWeAxEfVjXufpBqU2YKopyZYmN9P1V"; // add gov payment addy later
+        std::string strDevAddress = "ZUMYD3VX7ZcbBpdZMtMNioAAKQjKguKWmd"; // add gov payment addy later
         CZumyAddress intAddress(strDevAddress.c_str());
         CTxDestination devDestination = intAddress.Get();
         CScript devScriptPubKey = GetScriptForDestination(devDestination);
 
         fundRewardObj.push_back(Pair("payee", strDevAddress.c_str()));
         fundRewardObj.push_back(Pair("script", HexStr(devScriptPubKey.begin(), devScriptPubKey.end())));
-        fundRewardObj.push_back(Pair("amount", 0.5 * COIN));
+        fundRewardObj.push_back(Pair("amount", 0.2 * COIN));
 
         result.push_back(Pair("fundreward", fundRewardObj));
     }
+	
+
 
     UniValue superblockObjArray(UniValue::VARR);
     if(pblock->voutSuperblock.size()) {

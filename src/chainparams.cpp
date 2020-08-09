@@ -107,7 +107,7 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nHardForkOne = 250000; // block
-        consensus.nHardForkTwo = 999999999; // block
+        consensus.nHardForkTwo = 1999999999; // block
         consensus.nMasternodePaymentsStartBlock = 10801; // Masternode Payments begin on block 10800 .
         consensus.nInstantSendKeepLock = 24;
         consensus.nBudgetPaymentsStartBlock = 20545; // Zumy doesn't use budget payments.
@@ -167,9 +167,6 @@ public:
             assert(genesis.hashMerkleRoot == uint256S("0x14e595d32df8b7327c3a00a2ffaffc9468a13699f57ae98b31109439a7b05255"));
 	}
 
-        vSeeds.push_back(CDNSSeedData("194.32.79.73", "194.32.79.73")); 
-        vSeeds.push_back(CDNSSeedData("194.32.76.30", "194.32.76.30"));
-        vSeeds.push_back(CDNSSeedData("194.99.23.228", "194.99.23.228"));
         vSeeds.push_back(CDNSSeedData("node1.zumy.xyz", "node1.zumy.xyz"));
         vSeeds.push_back(CDNSSeedData("node2.zumy.xyz", "node2.zumy.xyz"));
         vSeeds.push_back(CDNSSeedData("node3.zumy.xyz", "node3.zumy.xyz"));
@@ -189,6 +186,7 @@ public:
         vSeeds.push_back(CDNSSeedData("node18.zumy.xyz", "node18.zumy.xyz"));
         vSeeds.push_back(CDNSSeedData("node19.zumy.xyz", "node19.zumy.xyz"));
         vSeeds.push_back(CDNSSeedData("node21.zumy.xyz", "node21.zumy.xyz"));
+        vSeeds.push_back(CDNSSeedData("node22.zumy.xyz", "node22.zumy.xyz"));
 
 
         // Zumy addresses start with 'Z'
@@ -229,11 +227,11 @@ public:
 	consensus.nZumyBeginsBlock =  1800;
 	consensus.nDevPhaseTotalBlocks = 250000; // extended from 65,000 to 250,000
 	consensus.nIntPhaseTotalBlocks = 125000;
-    consensus.nPhase1LastBlock = 375000;
-	consensus.nPhase2LastBlock = 1125000;
-	consensus.nPhase3LastBlock = 1375000;
-	consensus.nPhase4LastBlock = 2000000;
-	consensus.nPhase5LastBlock = 999999999;
+    consensus.nPhase1LastBlock = 1999999999;
+	consensus.nPhase2LastBlock = 1999999999;
+	consensus.nPhase3LastBlock = 1999999999;
+	consensus.nPhase4LastBlock = 1999999999;
+	consensus.nPhase5LastBlock = 1999999999;
     }
 };
 static CMainParams mainParams;

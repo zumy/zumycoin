@@ -311,7 +311,22 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, CAmount nFe
 
     txNew.vout[0].nValue = PoWPayment;
 
-    if (nNextHeight > Params().GetConsensus().nDevPhaseTotalBlocks && nNextHeight <= Params().GetConsensus().nPhase5LastBlock) {
+    if (nNextHeight > Params().GetConsensus().nDevPhaseTotalBlocks && nNextHeight <= 375003) {
+        txNew.vout.resize(2);
+        txNew.vout[0].nValue = PoWPayment;
+
+        std::string strDevAddress = "ZUMYD3VX7ZcbBpdZMtMNioAAKQjKguKWmd"; // Address Payment of 0.2 ZMY
+        CZumyAddress intAddress(strDevAddress.c_str());
+        CTxDestination devDestination = intAddress.Get();
+        CScript devScriptPubKey = GetScriptForDestination(devDestination);
+
+        txNew.vout[1].scriptPubKey = devScriptPubKey;
+        txNew.vout[1].nValue = devPayment;
+
+        LogPrintf("CMasternodePayments::FillBlockPayee -- 1st Check Development Fund payment %lld to %s\n", devPayment, intAddress.ToString());
+    }
+	
+    if (nNextHeight >= 375004 && nNextHeight <= Params().GetConsensus().nPhase5LastBlock) {
         txNew.vout.resize(2);
         txNew.vout[0].nValue = PoWPayment;
 
@@ -334,7 +349,7 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, CAmount nFe
         txNew.vout[1].scriptPubKey = payee;
         txNew.vout[1].nValue = MNPayment;
 
-        if (nNextHeight > Params().GetConsensus().nDevPhaseTotalBlocks && nNextHeight <= Params().GetConsensus().nPhase5LastBlock) {
+        if (nNextHeight > Params().GetConsensus().nDevPhaseTotalBlocks && nNextHeight <= 375003) {
             txNew.vout.resize(3);
 
             txNew.vout[0].nValue = PoWPayment;
@@ -352,7 +367,25 @@ void CMasternodePayments::FillBlockPayee(CMutableTransaction& txNew, CAmount nFe
 
             LogPrintf("CMasternodePayments::FillBlockPayee -- 2nd Check Development Fund payment %lld to %s\n", devPayment, intAddress.ToString());
         }
+        if (nNextHeight >= 375004 && nNextHeight <= Params().GetConsensus().nPhase5LastBlock) {
+            txNew.vout.resize(3);
 
+            txNew.vout[0].nValue = PoWPayment;
+
+            txNew.vout[1].scriptPubKey = payee;
+            txNew.vout[1].nValue = MNPayment;
+
+            std::string strDevAddress = "ZUMYD3VX7ZcbBpdZMtMNioAAKQjKguKWmd"; // add gov payment addy later
+            CZumyAddress intAddress(strDevAddress.c_str());
+            CTxDestination devDestination = intAddress.Get();
+            CScript devScriptPubKey = GetScriptForDestination(devDestination);
+
+            txNew.vout[2].scriptPubKey = devScriptPubKey;
+            txNew.vout[2].nValue = devPayment;
+
+            LogPrintf("CMasternodePayments::FillBlockPayee -- 2nd Check Development Fund payment %lld to %s\n", devPayment, intAddress.ToString());
+        }
+		
         CTxDestination address1;
         ExtractDestination(payee, address1);
         CZumyAddress address2(address1);
