@@ -1781,36 +1781,36 @@ CAmount GetPoWBlockPayment(const int& nHeight, CAmount nFees)
         return nIntPoWReward;
     }
     else if (chainActive.Height() >= 375003 && nNextHeight <= 467001) {
-        nIntPoWReward = 1.4* COIN;
+        nIntPoWReward = 1.2* COIN; // will be 0.2 + rewards from now on. ie this one here is actually 1.4 = 0.2 + 1.2 for PoW miners.
         LogPrint("creation", "GetPoWBlockPayment() : create=%s PoW Reward=%d\n", FormatMoney(nIntPoWReward), nIntPoWReward);
         return nIntPoWReward;
     }
     else if (chainActive.Height() >= 467002 && nNextHeight <= 592001) {
-        nIntPoWReward = 1.2* COIN;
+        nIntPoWReward = 1.0* COIN; // + 0.2
         LogPrint("creation", "GetPoWBlockPayment() : create=%s PoW Reward=%d\n", FormatMoney(nIntPoWReward), nIntPoWReward);
         return nIntPoWReward;
     }
     else if (chainActive.Height() >= 592002 && nNextHeight <= 717000) {
-        nIntPoWReward = 1* COIN;
+        nIntPoWReward = 0.8* COIN;// + 0.2
         LogPrint("creation", "GetPoWBlockPayment() : create=%s PoW Reward=%d\n", FormatMoney(nIntPoWReward), nIntPoWReward);
         return nIntPoWReward;
     }    else if (chainActive.Height() >= 717001 && nNextHeight <= 842000) {
-        nIntPoWReward = 0.8* COIN;
+        nIntPoWReward = 0.6* COIN;// + 0.2
         LogPrint("creation", "GetPoWBlockPayment() : create=%s PoW Reward=%d\n", FormatMoney(nIntPoWReward), nIntPoWReward);
         return nIntPoWReward;
     }
     else if (chainActive.Height() >= 842001 && nNextHeight <= 967000) {
-        nIntPoWReward = 0.9* COIN;
+        nIntPoWReward = 0.7* COIN;// + 0.2
         LogPrint("creation", "GetPoWBlockPayment() : create=%s PoW Reward=%d\n", FormatMoney(nIntPoWReward), nIntPoWReward);
         return nIntPoWReward;
     }
     else if (chainActive.Height() >= 967001 && nNextHeight <= 1092000) {
-        nIntPoWReward = 1.2* COIN;
+        nIntPoWReward = 1.0* COIN;// + 0.2
         LogPrint("creation", "GetPoWBlockPayment() : create=%s PoW Reward=%d\n", FormatMoney(nIntPoWReward), nIntPoWReward);
         return nIntPoWReward;
     }	
     else {
-        nIntPoWReward = 1 * COIN;
+        nIntPoWReward = 0.8 * COIN;// + 0.2 FINAL BLOCK REWARD 1.0
         LogPrint("creation", "GetPoWBlockPayment() : create=%s PoW Reward=%d\n", FormatMoney(nIntPoWReward + nFees), nIntPoWReward + nFees);
         return nIntPoWReward + nFees;
     }
