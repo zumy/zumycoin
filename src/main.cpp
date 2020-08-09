@@ -1821,48 +1821,8 @@ CAmount GetMasternodePayment(bool fMasternode)
 {
     CAmount nIntMNReward;
     int nIntPhase, nNextHeight = chainActive.Height() + 1;;
-    if (fMasternode && chainActive.Height() > Params().GetConsensus().nMasternodePaymentsStartBlock && nNextHeight <= Params().GetConsensus().nPhase1LastBlock) {
+    if (fMasternode && chainActive.Height() > Params().GetConsensus().nMasternodePaymentsStartBlock && nNextHeight <= Params().GetConsensus().nPhase5LastBlock) {
         nIntMNReward = 0.8 * COIN;
-        LogPrint("creation", "GetMasternodePayment() : create=%s MN Payment=%d\n", FormatMoney(nIntMNReward), nIntMNReward);
-        return nIntMNReward;
-    }
-    else if (fMasternode && nNextHeight > Params().GetConsensus().nPhase1LastBlock && nNextHeight <= Params().GetConsensus().nPhase2LastBlock) {
-        nIntPhase = (nNextHeight - Params().GetConsensus().nPhase1LastBlock) / Params().GetConsensus().nIntPhaseTotalBlocks;
-        switch(nIntPhase) {
-            case 0: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 1: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 2: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 3: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 4: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 5: nIntMNReward = 0.8 * COIN;
-        }
-        LogPrint("creation", "GetMasternodePayment() : create=%s MN Payment=%d\n", FormatMoney(nIntMNReward), nIntMNReward);
-        return nIntMNReward;
-    }
-    else if (fMasternode && nNextHeight > Params().GetConsensus().nPhase2LastBlock && nNextHeight <= Params().GetConsensus().nPhase3LastBlock) {
-        nIntMNReward = 0.8 * COIN;
-        LogPrint("creation", "GetMasternodePayment() : create=%s MN Payment=%d\n", FormatMoney(nIntMNReward), nIntMNReward);
-        return nIntMNReward;
-    }
-    else if (fMasternode && nNextHeight > Params().GetConsensus().nPhase3LastBlock && nNextHeight <= Params().GetConsensus().nPhase4LastBlock) {
-        nIntPhase = (nNextHeight - Params().GetConsensus().nPhase3LastBlock) / Params().GetConsensus().nIntPhaseTotalBlocks;
-        switch(nIntPhase) {
-            case 0: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 1: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 2: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 3: nIntMNReward = 0.8 * COIN;
-                    break;
-            case 4: nIntMNReward = 0.8 * COIN;
-                    break;
-        }
         LogPrint("creation", "GetMasternodePayment() : create=%s MN Payment=%d\n", FormatMoney(nIntMNReward), nIntMNReward);
         return nIntMNReward;
     }
@@ -2890,7 +2850,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     int nNextHeight = chainActive.Height() + 1;
 
     if (nNextHeight > Params().GetConsensus().nPhase1LastBlock && nNextHeight <= Params().GetConsensus().nPhase3LastBlock) {
-        fundReward = 0 * COIN; // Developer Gov fund amount // check ann in discord
+        fundReward = 0.2 * COIN; // Developer Gov fund amount // check ann in discord
 
         if (!IsFundRewardValid(block.vtx[0], fundReward)) {
         return state.DoS(0, error("ConnectBlock(ZMY): didn't pay the Development Fund"), REJECT_INVALID, "bad-cb-amount");
